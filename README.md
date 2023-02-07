@@ -55,3 +55,8 @@ $ docker run \
 ```
 $ docker exec --interactive --tty huckleberry sh
 ```
+
+### System
+```
+$ docker compose up -d
+```
