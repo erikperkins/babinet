@@ -1,0 +1,31 @@
+services:
+  huckleberry:
+    image: dockholliday:latest
+    ports:
+      - 8000:5000
+    networks:
+      - kate
+    volumes:
+      - ./:/app
+    environment:
+      POSTGRES_HOST: tombstone
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: aneducatedman
+      POSTGRES_DATABASE: postgres
+
+  tombstone:
+    image: postgres:latest
+    networks:
+      - kate
+    ports:
+      - 8001:5432
+    volumes:
+      - daisy:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: aneducatedman
+
+volumes:
+  daisy:
+
+networks:
+  kate:
