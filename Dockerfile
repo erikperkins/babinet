@@ -1,7 +1,8 @@
-FROM python:3.9-slim-buster
+FROM python:3.9-slim-bullseye
+RUN useradd dockholliday
 ENV APP=/app
 WORKDIR $APP
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 COPY . .
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
+CMD ["uwsgi", "--ini", "uwsgi.ini"]

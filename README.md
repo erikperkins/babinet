@@ -57,6 +57,21 @@ $ docker exec --interactive --tty huckleberry sh
 ```
 
 ### System
+Development:
+```
+$ docker compose -f docker-compose.dev.yml up -d
+```
+Production:
 ```
 $ docker compose up -d
+```
+
+### Flask
+```
+$ venv/bin/pyuwsgi --http 0.0.0.0:8000 --master --module wsgi:app
+```
+
+### Stats
+```
+$ uwsgi --connect-and-read 127.0.0.1:8001
 ```
