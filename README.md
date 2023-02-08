@@ -68,5 +68,10 @@ $ docker compose up -d
 
 ### Flask
 ```
-$ venv/bin/pyuwsgi --http 0.0.0.0:5000 --master --module wsgi:app
+$ venv/bin/pyuwsgi --http 0.0.0.0:8000 --master --module wsgi:app
+```
+
+### Stats
+```
+$ uwsgi --connect-and-read 127.0.0.1:8001
 ```

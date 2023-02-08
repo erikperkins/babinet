@@ -1,19 +1,27 @@
 services:
   huckleberry:
     image: dockholliday:latest
-    ports:
-      - 8000:8000
-      - 8001:8001
     networks:
-      - kate
+      - tombstone
+    expose:
+      - 8000
     volumes:
       - daisy:/app/data
     environment:
       FLASK_APP: app
-      FLASK_DEBUG: 0
+      FLASK_DEBUG: 1
+
+  kate:
+    build: ./services/nginx
+    networks:
+      - tombstone
+    ports:
+      - 80:80
+    depends_on:
+      - huckleberry
 
 volumes:
   daisy:
 
 networks:
-  kate:
+  tombstone:

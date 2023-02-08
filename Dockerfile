@@ -1,4 +1,5 @@
 FROM python:3.9-slim-bullseye
+RUN useradd dockholliday
 ENV APP=/app
 WORKDIR $APP
 COPY requirements.txt requirements.txt
