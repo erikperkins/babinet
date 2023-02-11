@@ -3,6 +3,7 @@
 *.iml
 venv/
 data/
+/services/jupyter
 docker-compose.yml
 docker-compose.dev.yml
 manifest.yml
