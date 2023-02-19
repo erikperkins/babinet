@@ -3,4 +3,5 @@ venv/
 *.iml
 __pycache__/
 data/
+services/jupyter/
 server
