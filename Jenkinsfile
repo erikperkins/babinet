@@ -4,15 +4,22 @@ pipeline {
   }
   agent { dockerfile true }
   stages {
-    stage('Test') {
+
+    stage('Unit Tests') {
       steps {
         script {
-          sh """
-          python -m unittest discover
-          """
+          sh "python -m unittest discover"
         }
       }
     }
+
+    stage('Deploy') {
+      when { branch 'master' }
+      steps {
+        echo 'Deploying'
+      }
+    }
+
   }
   post {
     always {
