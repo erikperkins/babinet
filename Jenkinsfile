@@ -21,11 +21,22 @@ pipeline {
       }
     }
 
-    stage('Test') {
-      agent { dockerfile true }
+    stage('Build') {
+      agent any
       steps {
         script {
-          sh "python -m unittest discover"
+          dockerImage = docker.build(imageName)
+        }
+      }
+    }
+
+    stage('Test') {
+      agent any
+      steps {
+        script {
+          dockerImage.inside {
+            sh "python -m unittest discover"
+          }
         }
       }
     }
@@ -34,9 +45,9 @@ pipeline {
       agent any
       steps {
         script {
-          dockerImage = docker.build(imageName)
           docker.withRegistry('', registryCredential) {
             dockerImage.push("$BUILD_NUMBER")
+            dockerImage.push("latest")
           }
         }
       }
