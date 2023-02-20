@@ -1,3 +1,4 @@
+[![Build Status](http://52.89.207.216/jenkins/buildStatus/icon?job=github%2Fdockholliday%2Fmaster)](http://52.89.207.216/jenkins/job/github/job/dockholliday/job/master/)
 ## Dockholliday
 
 This is a simple containerized Flask application.
