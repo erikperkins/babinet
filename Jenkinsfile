@@ -16,6 +16,7 @@ pipeline {
           		pip install virtualenv --user
                   virtualenv venv
           fi
+          . venv/bin/activate
           pip install -r requirements.txt
           """
         }
@@ -30,6 +31,11 @@ pipeline {
           """
         }
       }
+    }
+  }
+  post {
+    always {
+      cleanWs()
     }
   }
 }
