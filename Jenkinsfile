@@ -1,6 +1,7 @@
 pipeline {
+  agent none
   environment {
-    registry = 'erikperkins/huckleberry'
+    imageName = 'erikperkins/huckleberry'
     registryCredential = 'dockerhub-credentials'
     dockerImage = ''
   }
@@ -10,14 +11,9 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '3'))
   }
 
-  agent {
-    dockerfile true
-  }
-
-
   stages {
-
     stage('Clone') {
+      agent any
       steps {
         script {
           checkout scm
@@ -26,6 +22,7 @@ pipeline {
     }
 
     stage('Test') {
+      agent { dockerfile true }
       steps {
         script {
           sh "python -m unittest discover"
@@ -34,27 +31,33 @@ pipeline {
     }
 
     stage('Deliver') {
+      agent any
       steps {
         script {
-          dockerImage = docker.build registry
-          docker.withRegistry('', registryCredential)
-          dockerImage.push()
+          dockerImage = docker.build(imageName)
+          docker.withRegistry('', registryCredential) {
+            dockerImage.push("$BUILD_NUMBER")
+          }
         }
       }
     }
 
     stage('Deploy') {
+      agent any
       when { branch 'master' }
       steps {
-        echo 'Deploying'
+        echo 'Deploying...'
       }
     }
 
   }
   post {
     always {
-      cleanWs()
-      sh "docker image rm $registry:$BUILD_NUMBER"
+      node(null) {
+        sh "docker image rm $imageName:$BUILD_NUMBER"
+        sh "docker image rm $imageName:latest"
+        cleanWs()
+      }
     }
   }
 }
