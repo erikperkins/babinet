@@ -13,7 +13,7 @@ class TestMain(unittest.TestCase):
   def test_hello_world(self):
     response = self.client.get("/")
     self.assertEqual(200, response.status_code)
-    self.assertEqual("Hello, Docker!\n", response.text)
+    self.assertEqual("Hello Kubernetes!\n", response.text)
 
   def test_echo(self):
     body = {'hello': 'world'}

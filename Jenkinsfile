@@ -57,7 +57,11 @@ pipeline {
       agent any
       when { branch 'master' }
       steps {
-        echo 'Deploying...'
+        script {
+          withKubeConfig([credentialsId: "kube-config", contextName: "mlops"]) {
+            sh "kubectl apply -f manifest.yml"
+          }
+        }
       }
     }
 
