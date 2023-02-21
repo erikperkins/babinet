@@ -55,7 +55,7 @@ pipeline {
 
     stage('Deploy') {
       agent any
-      // when { branch 'master' }
+      when { branch 'master' }
       steps {
         script {
           withKubeConfig([credentialsId: "kube-config", contextName: "mlops"]) {
