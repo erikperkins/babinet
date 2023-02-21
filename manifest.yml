@@ -35,14 +35,12 @@ spec:
         app: dockholliday
     spec:
       containers:
-        - image: erikperkins/huckleberry
-          imagePullPolicy: always
+        - image: erikperkins/huckleberry:latest
           name: huckleberry
           volumeMounts:
             - name: uwsgi-socket
               mountPath: /tmp
-        - image: erikperkins/kate
-          imagePullPolicy: always
+        - image: erikperkins/kate:latest
           name: kate
           volumeMounts:
             - name: uwsgi-socket
