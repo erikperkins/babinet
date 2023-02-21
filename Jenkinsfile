@@ -58,7 +58,7 @@ pipeline {
       // when { branch 'master' }
       steps {
         script {
-          withKubeConfig([credentialsId: "jenkins-k8s-mlops-secret", serverUrl: ""]) {
+          withKubeConfig([credentialsId: "kube-config", serverUrl: ""]) {
             sh "kubectl apply -f manifest.yml"
           }
         }

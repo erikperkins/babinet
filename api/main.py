@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-  return "Hello, Docker!\n"
+  return "Hello, Kubernetes!\n"
 
 @app.route("/echo", methods = ["POST"])
 def echo():
