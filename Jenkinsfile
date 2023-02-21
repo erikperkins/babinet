@@ -55,9 +55,13 @@ pipeline {
 
     stage('Deploy') {
       agent any
-      when { branch 'master' }
+      // when { branch 'master' }
       steps {
-        echo 'Deploying...'
+        script {
+          withKubeConfig([credentialsId: "jenkins-k8s-mlops-secret", serverUrl: ""]) {
+            sh "kubectl apply -f manifest.yml"
+          }
+        }
       }
     }
 
