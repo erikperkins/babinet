@@ -36,11 +36,13 @@ spec:
     spec:
       containers:
         - image: erikperkins/huckleberry
+          imagePullPolicy: always
           name: huckleberry
           volumeMounts:
             - name: uwsgi-socket
               mountPath: /tmp
         - image: erikperkins/kate
+          imagePullPolicy: always
           name: kate
           volumeMounts:
             - name: uwsgi-socket
