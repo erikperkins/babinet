@@ -4,6 +4,7 @@
 venv/
 data/
 /services/jupyter
+services/kubernetes/certificates
 docker-compose.yml
 docker-compose.dev.yml
 manifest.yml
