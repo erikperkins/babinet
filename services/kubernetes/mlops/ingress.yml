@@ -1,23 +1,31 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mlops
+  labels:
+    name: mlops
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: default
+  namespace: mlops
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-#  tls:
-#    - hosts:
-#        - dev.kops.mydomain.com
-#      secretName: tls-secret # create before applying ingress
+  #  tls:
+  #    - hosts:
+  #        - test.cauchy.link
+  #      secretName: tls-secret # create before applying ingress
   ingressClassName: nginx
   rules:
     - host: test.cauchy.link
       http:
         paths:
-          - path: /blue
+          - path: /tombstone
             pathType: Prefix
             backend:
               service:
-                name: blue
+                name: tombstone
                 port:
-                  number: 5678
+                  number: 80
