@@ -5,10 +5,6 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-#  tls:
-#    - hosts:
-#        - test.cauchy.link
-#      secretName: tls-secret # create before applying ingress
   ingressClassName: nginx
   rules:
     - host: test.cauchy.link
@@ -21,3 +17,14 @@ spec:
                 name: blue
                 port:
                   number: 5678
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: red
+                port:
+                  number: 5678
+#  tls:
+#    - hosts:
+#        - test.cauchy.link
+#      secretName: tls-secret # create before applying ingress

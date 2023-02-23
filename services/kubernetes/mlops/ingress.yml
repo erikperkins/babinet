@@ -13,10 +13,6 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  #  tls:
-  #    - hosts:
-  #        - test.cauchy.link
-  #      secretName: tls-secret # create before applying ingress
   ingressClassName: nginx
   rules:
     - host: test.cauchy.link
@@ -29,3 +25,7 @@ spec:
                 name: tombstone
                 port:
                   number: 80
+#  tls:
+#    - hosts:
+#        - test.cauchy.link
+#      secretName: tls-secret # create before applying ingress
