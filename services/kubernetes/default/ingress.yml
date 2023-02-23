@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+#  tls:
+#    - hosts:
+#        - test.cauchy.link
+#      secretName: tls-secret # create before applying ingress
+  ingressClassName: nginx
+  rules:
+    - host: test.cauchy.link
+      http:
+        paths:
+          - path: /blue
+            pathType: Prefix
+            backend:
+              service:
+                name: blue
+                port:
+                  number: 5678

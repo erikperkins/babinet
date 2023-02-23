@@ -59,7 +59,7 @@ pipeline {
       steps {
         script {
           withKubeConfig([credentialsId: "kube-config", contextName: "mlops"]) {
-            sh "kubectl apply -f manifest.yml"
+            sh "kubectl apply -f services/kubernetes/mlops/dockholliday.yml"
           }
         }
       }
