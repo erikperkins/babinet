@@ -20,3 +20,7 @@ def hello_world():
 def echo():
   body = request.get_json()
   return jsonify(body)
+
+@app.route("/error", methods = ["GET"])
+def error():
+  return 1 / 0
