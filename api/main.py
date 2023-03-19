@@ -1,6 +1,14 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+
+sentry_sdk.init(
+  dsn = "http://c18b7042926d41feb1a67f19da0fee45@sentry.cauchy.link/3",
+  integrations = [FlaskIntegration()],
+  traces_sample_rate = 1.0
+)
 
 app = Flask(__name__)
 
