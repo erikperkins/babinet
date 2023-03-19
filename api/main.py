@@ -40,3 +40,8 @@ def error():
 def message():
   capture_message('Hello, Sentry!')
   return 'Sent message'
+
+@app.route("/api_error", methods = ["GET"])
+def api_error():
+  capture_message('API Error!')
+  return 'API error!'
