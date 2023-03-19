@@ -7,7 +7,7 @@ from sentry_sdk import capture_exception
 from sentry_sdk import capture_message
 
 sentry_sdk.init(
-  dsn = "http://c18b7042926d41feb1a67f19da0fee45@sentry.cauchy.link/3",
+  dsn = "https://c18b7042926d41feb1a67f19da0fee45@sentry.cauchy.link/3",
   integrations = [FlaskIntegration()],
   traces_sample_rate = 0.5
 )
@@ -29,7 +29,7 @@ def error():
     value = 1 / 0
   except Exception as e:
     capture_exception(e)
-  return value
+  return "Error!"
 
 @app.route("/message", methods = ["GET"])
 def message():
