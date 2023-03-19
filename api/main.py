@@ -23,6 +23,11 @@ def echo():
   body = request.get_json()
   return jsonify(body)
 
+@app.route("/exception", methods = ["GET"])
+def exception():
+  value = 1 / 0
+  return "Exception!"
+
 @app.route("/error", methods = ["GET"])
 def error():
   try:
