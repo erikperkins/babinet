@@ -3,6 +3,8 @@ from flask import request
 from flask import jsonify
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
+from sentry_sdk import capture_exception
+from sentry_sdk import capture_message
 
 sentry_sdk.init(
   dsn = "http://c18b7042926d41feb1a67f19da0fee45@sentry.cauchy.link/3",
@@ -23,4 +25,13 @@ def echo():
 
 @app.route("/error", methods = ["GET"])
 def error():
-  return 1 / 0
+  try:
+    value = 1 / 0
+  except Exception as e:
+    capture_exception(e)
+  return value
+
+@app.route("/message", methods = ["GET"])
+def message():
+  capture_message('Hello, Sentry!')
+  return 'Sent message'
