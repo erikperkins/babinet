@@ -1,10 +1,12 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
+import os
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
 from sentry_sdk import capture_exception
 from sentry_sdk import capture_message
+from .thread import TripThread
 
 sentry_sdk.init(
   dsn = "https://c18b7042926d41feb1a67f19da0fee45@sentry.cauchy.link/3",
@@ -13,6 +15,11 @@ sentry_sdk.init(
 )
 
 app = Flask(__name__)
+
+trips = TripThread(
+  minio_access_key = os.environ.get('MINIO_ACCESS_KEY'),
+  minio_secret_key = os.environ.get('MINIO_SECRET_KEY')
+)
 
 @app.route("/")
 def hello_world():
@@ -45,3 +52,13 @@ def message():
 def api_error():
   capture_message('API Error!')
   return 'API error!'
+
+@app.route("/start", methods = ["GET"])
+def start_trips():
+  trips.start()
+  return "Started\n"
+
+@app.route("/stop", methods = ["GET"])
+def stop_trips():
+  trips.stop()
+  return "Stopped\n"
