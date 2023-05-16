@@ -7,7 +7,7 @@ from sentry_sdk import capture_exception
 from sentry_sdk import capture_message
 
 sentry_sdk.init(
-  dsn = "https://c18b7042926d41feb1a67f19da0fee45@sentry.cauchy.link/3",
+  dsn = "https://5e2ac15c66d64cfa97d13edcacd6e9ec@sentry.cauchy.link/2",
   integrations = [FlaskIntegration()],
   traces_sample_rate = 0.5
 )
